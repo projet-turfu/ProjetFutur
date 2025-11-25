@@ -161,7 +161,7 @@
             <br>
             <?php
                 $mickael = ['Mickaël', 'mickael@exemple.com', 'S3cr3t', 34];
-                $mathieu = ['Mathieu', 'mathieu@exemple.com', 'devine', 33];
+                $mathieu = ['Mathieu', 'mathieu2@exemple.com', 'devine', 33];
                 $laurene = ['Laurène', 'laurene@exemple.com', 'P4ssw0rD', 28];
 
                 $users = [$mickael, $mathieu, $laurene];
@@ -171,11 +171,12 @@
         </p>
         <p>
             <?php
-                //$isValid = true;
+                $lines = 1;
 
-                //while ($isValid) {
-                    //echo "valide";
-                //}
+                while ($lines <= 10) {
+                    echo "bort " . $lines . "<br />";
+                    $lines++;
+                }
             ?>
         </p>
         
