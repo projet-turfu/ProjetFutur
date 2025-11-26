@@ -179,6 +179,30 @@
                 }
             ?>
         </p>
+        <p>
+            <br>
+            <?php
+                for ($testing = 0; $testing <= 5; $testing++) {
+                    echo "testing " . $testing . "<br />";
+                }
+            ?>
+        </p>
+        <p>
+            <br>
+            <?php
+                $recipes = [
+                    ['Canistrelli','[...]','miam',true,],
+                    ['Frappes','[...]','yum',false,],
+                ];
+            ?> 
+            <ul>       
+                <?php for ($miam = 0; $miam <= 1; $miam++): ?>
+                    <li><?php echo $recipes[$miam][0] . ' (' . $recipes[$miam][2] . ')'; ?></li>
+                <?php endfor; ?>
+            <ul>    
+        </p>
+        <p>
+            
         
     </main>
 
