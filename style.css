@@ -1,26 +1,196 @@
-@import url('https://fonts.googleapis.com/css2?family=TASA+Explorer:wght@400..800&display=swap');
-
+/* style file for the presentation page */
 html {
     padding: 0;
     margin: 0;
 }
 
+
 body {
     font-family: "TASA Explorer", sans-serif;
     margin: 0; 
+    background-color: rgb(218, 218, 218); 
     color: rgb(0, 0, 0); 
     
 }
 
+/* header part */
 header {
-    z-index: 9999;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0;
+    z-index: 90;
+    position: fixed; 
+    margin-bottom: 10px;
     width: 100%;
-    height: 50px;
-    font-size: 25px;
-    background-color: rgb(215, 255, 246);
+    height: 60px;
+    background-color: rgb(80, 135, 255);
+    box-shadow: 6px 6px 25px rgba(0, 0, 0, 0.747);
+    border: 3px solid rgb(255, 0, 0);
     
 }
 
-.searchbar {
-    padding-top: 10px;
+h1 {
+    color: white;
+}
+
+.headerButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    border: 3px solid rgb(0, 0, 0);
+}
+
+.connectionButton1 {
+    border-radius: 50px;
+    border: 3px solid rgb(124, 196, 255);
+    height: 40px;
+    cursor: pointer;
+}
+
+.connectionButton2 {
+    border-radius: 50px;
+    border: 3px solid rgb(124, 196, 255);
+    height: 40px;
+    background-color: rgb(61, 74, 253);
+    color: white;
+    cursor: pointer;
+}
+
+.connectionButton1:hover, .connectionButton2:hover {
+    opacity: 0.7;
+}
+
+/*main part */
+
+/* first section */
+.hero {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 900px;
+    width: 100%;
+    border: 3px solid rgb(0, 0, 0);
+}
+
+.texteDescription {
+    width: 50%;
+    padding: 0 10%;
+    border: 3px solid rgb(0, 0, 0);
+}
+
+.imageDescription {
+    padding: 0 10%;
+    width: 50%;
+    border: 3px solid rgb(0, 0, 0);
+}
+
+.resize {
+    width: 100%;
+    max-width: max-content;
+}
+
+/* second section */
+.sectionCarousel {
+    display: flex;
+    flex-direction: column;
+    height: 900px;
+    width: 100%;
+    background-color: white;
+    border: 3px solid rgb(212, 12, 12);
+}
+
+.carousel {
+    width: 1113px;
+    height: 700px;
+    overflow-x: auto;
+    border: 3px solid rgb(40, 0, 150);
+    margin: 3em auto;
+    display: flex;
+    gap: 1em;
+    padding: 1em;
+    scroll-behavior: smooth;
+    anchor-name: --carousel;
+    scroll-snap-type: x mandatory;
+    scroll-marker-group: after;
+}
+
+.carousel::scroll-marker-group {
+    display: flex;
+    justify-content: center;
+    gap: .5em;
+}
+
+.card::scroll-marker {
+    content:'';
+    height: 1em;
+    width: 1em;
+    background-color: #7f92bb;
+    border-radius: 50%;
+}
+
+.card::scroll-marker:target-current {
+    background-color: #2a6cfc;
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel::scroll-button(right), .carousel::scroll-button(left) {
+    margin-left: 5px;
+    content: '>'; 
+    color: white;
+    border: none;
+    background-color: #afc8ff;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: fixed;
+    position-anchor: --carousel;
+    position-area: right center;
+    translate: 0%;
+}
+
+.carousel::scroll-button(left) {
+    content: '<';
+    position-area: left center;
+    translate: -20%;
+}
+
+.carousel::scroll-button(right):disabled, .carousel::scroll-button(left):disabled {
+    opacity: 0.5;
+    cursor: auto;
+}
+
+.card {
+    scroll-snap-align: start;
+    flex: 0 0 20em;
+    aspect-ratio: 5 / 3;
+    background-color: rgb(10, 255, 2);
+    padding: 1em;
+    border-radius: .5em;
+    text-align: center;
+    align-content: center;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.459);
+}
+
+/* footer part */
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100px;
+    width: 100%;
+    bottom: 0px;
+    background: #1d2135;
+    border: 3px solid rgb(10, 255, 2);
+    color: white;
+    margin: 0;
 }
