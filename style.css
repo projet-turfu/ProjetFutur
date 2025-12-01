@@ -1,4 +1,8 @@
 /* style file for the presentation page */
+@import url('https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&display=swap');
+
+
+
 html {
     padding: 0;
     margin: 0;
@@ -6,7 +10,7 @@ html {
 
 
 body {
-    font-family: "TASA Explorer", sans-serif;
+    font-family: "Alan Sans", sans-serif;
     margin: 0; 
     background-color: rgb(218, 218, 218); 
     color: rgb(0, 0, 0); 
@@ -108,7 +112,7 @@ h1 {
     width: 1113px;
     height: 700px;
     overflow-x: auto;
-    border: 3px solid rgb(40, 0, 150);
+    /*border: 3px solid rgb(40, 0, 150);*/
     margin: 3em auto;
     display: flex;
     gap: 1em;

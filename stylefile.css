@@ -1,4 +1,5 @@
 /* style file for the profile page */
+@import url('https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&display=swap');
 
 * {
     padding: 0;
@@ -10,10 +11,19 @@ html {
 }
 
 body {
+    font-family: "Alan Sans", sans-serif;
     background-color: rgb(218, 218, 218);
     display: grid;
     grid-template-columns: auto 1fr;
 }
+
+.logo {
+    display: flex;
+    font-size: 2em;
+    align-items: center;;
+    border: 3px solid rgb(80, 135, 255);
+}
+
 
 #sidebar {
     box-sizing: border-box;
