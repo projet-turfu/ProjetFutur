@@ -9,6 +9,7 @@
 			<input name="inscription" type="submit" value="inscription"/>
 			<input name="connexion" type="submit" value="connexion"/>
 		</form>
+		
 		<?php
 			
 			$servername = "localhost";
@@ -32,7 +33,7 @@
 				<input name="email" type="text" /> <br>
 				password: 
 				<input name="password" type="text" /> <br>
-				<input name="register" type="submit" />';
+				<input name="register" type="submit" value="inscription"/></form>';
 			}
 			
 			elseif (isset($_POST['connexion'])) {
@@ -41,34 +42,48 @@
 				<input name="pseudo" type="text" /> <br>
 				password: 
 				<input name="password" type="text" /> <br>
-				<input name="login" type="submit" />';
+				<input name="login" type="submit" value = "connexion"/></form>';
 			}
 			elseif(isset($_POST['register'])){
-				$requete = "select user, email from user ;";
-				$resultat = $mysqli->query($requete);
-				$x = 0;
-				foreach($resultat as $test){
-					if($_POST['email'] == $test['email'] and $_POST['user'] == $test['user']){
-						$x = 1;
-						break;
+				if(isset($_POST['user']) and isset($_POST['email']) and isset( $_POST['password'])){
+					$requete = "select user, email from user ;";
+					$resultat = $mysqli->query($requete);
+					$x = 0;
+					foreach($resultat as $test){
+						if($_POST['email'] == $test['email']){
+							$x = 1;
+							break;
+						}
+					}
+					if($x == 1){
+						echo "information invalide <br>";
+						echo '<form action="" method="post">
+						pseudo:
+						<input name="pseudo" type="text" /> <br>
+						email:
+						<input name="email" type="text" /> <br>
+						password: 
+						<input name="password" type="text" /> <br>
+						<input name="register" type="submit" value="inscription"/></form>';
+					}
+					elseif($_POST['user'] == "" and $_POST['email'] == "" and $_POST['password'] == "")
+						$x == 1;
+					else{
+						$requete = "INSERT INTO `user` (`user`, `password`, `email`) VALUES ('". $_POST['pseudo']."', '". $_POST['password']."', '". $_POST['email']."');";
+						$resultat = $mysqli->query($requete);
+						echo"inscritpion validée";
 					}
 				}
-				if($x == 1){
+				else
 					echo "information invalide <br>";
 					echo '<form action="" method="post">
-					pseudo:
-					<input name="pseudo" type="text" /> <br>
-					email:
-					<input name="email" type="text" /> <br>
-					password: 
-					<input name="password" type="text" /> <br>
-					<input name="register" type="submit" />';
-				}
-				else{
-					$requete = "INSERT INTO `user` (`user`, `password`, `email`) VALUES ('". $_POST['pseudo']."', '". $_POST['password']."', '". $_POST['email']."');";
-					$resultat = $mysqli->query($requete);
-					echo"inscritpion validée";
-				}
+						pseudo:
+						<input name="pseudo" type="text" /> <br>
+						email:
+						<input name="email" type="text" /> <br>
+						password: 
+						<input name="password" type="text" /> <br>
+						<input name="register" type="submit" value="inscription" /></form>'; ;
 				
 			}
 			elseif(isset($_POST['login'])){
@@ -76,7 +91,8 @@
 				$resultat = $mysqli->query($requete);
 				foreach($resultat as $test){
 					if($_POST['password'] == $test['password'] and $_POST['pseudo'] == $test['user']){
-						echo "connexion valide";
+						session_start();
+						$_SESSION["connect"] = $test["id_user"] ;
 						$url = "projet.php";
 						header("Location: $url", true, 302);
 						exit();
@@ -88,10 +104,11 @@
 				<input name="pseudo" type="text" /> <br>
 				password: 
 				<input name="password" type="text" /> <br>
-				<input name="login" type="submit" />';
+				<input name="login" type="submit" value = "connexion" /></form>';
 				
 				
 			}
+			
         ?>
     </main>
 </body>
