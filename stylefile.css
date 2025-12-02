@@ -12,11 +12,13 @@ html {
 
 body {
     font-family: "Alan Sans", sans-serif;
-    background-color: rgb(218, 218, 218);
     display: grid;
     grid-template-columns: auto 1fr;
+    background-color: grey;
+    
 }
 
+/* Sidebar part */
 .logo {
     display: flex;
     font-size: 2em;
@@ -28,7 +30,7 @@ body {
 #sidebar {
     box-sizing: border-box;
     height: 100vh;
-    width: 250px;
+    width: 200px;
     padding: 5px 1em;
     background-color: rgb(80, 135, 255);
     border-right: 1px solid rgb(0, 0, 0);
@@ -107,4 +109,16 @@ body {
 
 #toggleBtn:hover {
     background-color: rgb(52, 88, 165);
+}
+
+/* Main part */
+.background {
+    height:100vh;
+    width: 100%;
+    border: 2px solid rgb(255, 255, 255);
+    margin: 10px;
+    border-radius: 20px;
+    background: url('images/ProjectsBackground.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
 }
