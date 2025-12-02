@@ -16,7 +16,6 @@ body {
     background: rgb(80, 135, 255);
 }
 
-
 .wrapper {
     width: 420px;
     background: white;
@@ -31,17 +30,37 @@ body {
     text-align: center;
 }
 
+.wrapper h3 {
+    text-align: center;
+}
+
 .choiceButtons {
     display: grid;
     justify-content: center;
     align-items: center;
 }
 
-input.signinButton{
+.signinButton{
     height: 45px;
     width: 300px;
     background-color: rgb(80, 135, 255);
     color: white;
+    border-radius: 3px;
     border: none;
     outline: none;
+}
+
+.loginButton{
+    height: 45px;
+    width: 300px;
+    background-color: white;
+    border-radius: 3px;
+    border: solid 1px rgb(175, 175, 175);
+    outline: none;
+}
+
+.signinButton:hover, .loginButton:hover{
+    background-image: linear-gradient(rgb(0 0 0/15%) 0 0);
+    cursor: pointer;
+
 }

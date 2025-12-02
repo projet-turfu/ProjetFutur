@@ -14,7 +14,8 @@
         <div class="wrapper">
 			<h1>Crepo</h1>
 			<form class="choiceButtons" action="" method="post">
-				<input class="signinButton" name="inscription" type="submit" value="Créer un compte"/><br>
+				<input class="signinButton" name="inscription" type="submit" value="S'inscrire"/>
+				<h3>ou</h3>
 				<input class="loginButton" name="connexion" type="submit" value="Se connecter"/>
 			</form>
 			
