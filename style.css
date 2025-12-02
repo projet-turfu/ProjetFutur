@@ -35,8 +35,16 @@ header {
     
 }
 
+a{
+    text-decoration: none;
+}
+
 h1 {
     color: white;
+}
+
+.accueilCrepo {
+    cursor: pointer;
 }
 
 .headerButtons {
@@ -52,6 +60,7 @@ h1 {
     border-radius: 50px;
     border: 3px solid rgb(124, 196, 255);
     height: 40px;
+    font-family: "Alan Sans", sans-serif;
     cursor: pointer;
 }
 
@@ -60,6 +69,7 @@ h1 {
     border: 3px solid rgb(124, 196, 255);
     height: 40px;
     background-color: rgb(61, 74, 253);
+    font-family: "Alan Sans", sans-serif;
     color: white;
     cursor: pointer;
 }
@@ -204,8 +214,10 @@ footer {
   background-color: rgb(80, 135, 255);
   color: white;
   padding: 16px;
+  font-family: "Alan Sans", sans-serif;
   font-size: 16px;
   border: none;
+  cursor: pointer;
 }
 
 /* The container <div> - needed to position the dropdown content */
