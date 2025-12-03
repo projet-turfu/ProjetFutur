@@ -4,14 +4,15 @@
 <head>
     <meta charset="utf-8">
     <title>Crepo | Connexion</title>
-    <!--<link rel="icon" type="image/x-icon" href="images/favicon.png">-->
+    <link rel="icon" type="image/x-icon" href="images/favicon.png">
     <link href="styles/styleLogin.css" rel="stylesheet">
 </head>
 
 <body>
     <main>
         <div class="wrapper">
-			<h1>Crepo</h1>
+			
+			<h1><img src="images/logoBlack.png" class="logoCrepo">Crepo</h1>
 			<hr>
 			<div class="infoInput">
 				<?php

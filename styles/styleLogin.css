@@ -23,6 +23,13 @@ hr {
     margin:0 auto;
 }
 
+.logoCrepo {
+    height: 50px;
+    width: 50px;
+    transform: translateY(15px);
+}
+
+
 .wrapper {
     width: 420px;
     background: white;
