@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>Crepo | Connexion</title>
     <!--<link rel="icon" type="image/x-icon" href="images/favicon.png">-->
-    <link href="styleLogin.css" rel="stylesheet">
+    <link href="styles/styleLogin.css" rel="stylesheet">
 </head>
 
 <body>
@@ -37,7 +37,7 @@
 						<input class="inputBox" name="email" type="text" placeholder="Choisissez un email"/> <br>
 						Password<br> 
 						<input class="inputBox" name="password" type="password" placeholder="Choisissez un password"/> <br>
-						<input class="finalButton name="register" type="submit" value="Valider"/></form><br>
+						<input class="finalButton" name="register" type="submit" value="Valider"/></form><br>
 						<hr>
 						<form class="choiceButtons" action="" method="post">
 							<h3>ou</h3><br>
@@ -51,15 +51,16 @@
 						<input class="inputBox" name="pseudo" type="text" placeholder="Saisissez votre pseudo"/><br>
 						Password<br>
 						<input class="inputBox" name="password" type="password" placeholder="Saisissez votre password"/><br>
-						<input class="finalButton name="login" type="submit" value = "Continuer"/></form><br>
-						<hr>
-						<form class="choiceButtons" action="" method="post">
+						<input class="finalButton" name="login" type="submit" value = "Continuer"/></form><br>
+						<hr>';
+						echo'<form class="choiceButtons" action="" method="post">
 							<h3>ou</h3><br>
 							<input class="signinButtonBottom" name="inscription" type="submit" value="S\'inscrire"/>
 						</form>';
 					}
 					elseif(isset($_POST['register'])){
-						if(isset($_POST['user']) and isset($_POST['email']) and isset( $_POST['password'])){
+
+						if(isset($_POST['pseudo']) and isset($_POST['email']) and isset( $_POST['password'])){
 							$requete = "select user, email from user ;";
 							$resultat = $mysqli->query($requete);
 							$x = 0;
@@ -78,20 +79,27 @@
 								<input class="inputBox" name="email" type="text" placeholder="Choisissez un email"/> <br>
 								Password<br> 
 								<input class="inputBox" name="password" type="password" placeholder="Choisissez un password"/> <br>
-								<input class="finalButton name="register" type="submit" value="Valider"/></form><br>
+								<input class="finalButton" name="register" type="submit" value="Valider"/></form><br>
 								<hr>
 								<form class="choiceButtons" action="" method="post">
 									<h3>ou</h3><br>
 									<input class="loginButton" name="connexion" type="submit" value="Se connecter"/>
 								</form>';
 							}
-							elseif($_POST['user'] == "" and $_POST['email'] == "" and $_POST['password'] == "")
+							elseif($_POST['pseudo'] == "" and $_POST['email'] == "" and $_POST['password'] == "")
 								$x == 1;
 							else{
-								$requete = "INSERT INTO `user` (`user`, `password`, `email`) VALUES ('". $_POST['pseudo']."', '". $_POST['password']."', '". $_POST['email']."');";
-								$resultat = $mysqli->query($requete);
+
+								$stmt = $mysqli->prepare("INSERT INTO user (user, password, email) VALUES (?, ?, ?);" );
+								$no = $_POST['pseudo'];
+								$ps = $_POST['password'];
+								$ma = $_POST['email'];
+								$stmt->bind_param("sss", $no, $ps, $ma);
+								$stmt->execute();
+
 								echo"inscritpion validée";
 							}
+                
 						}
 						else
 							echo "information invalide <br>";
@@ -102,7 +110,7 @@
 								<input class="inputBox" name="email" type="text" placeholder="Choisissez un email"/> <br>
 								Password<br> 
 								<input class="inputBox" name="password" type="password" placeholder="Choisissez un password"/> <br>
-								<input class="finalButton name="register" type="submit" value="Valider" /></form><br>
+								<input class="finalButton" name="register" type="submit" value="Valider" /></form><br>
 								<hr>
 								<form class="choiceButtons" action="" method="post">
 									<h3>ou</h3><br>
@@ -111,6 +119,7 @@
 						
 					}
 					elseif(isset($_POST['login'])){
+						
 						$requete = "select * from user where user = '". $_POST['pseudo']."';";
 						$resultat = $mysqli->query($requete);
 						foreach($resultat as $test){
