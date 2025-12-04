@@ -31,7 +31,7 @@ header {
     height: 60px;
     background-color: rgb(80, 135, 255);
     box-shadow: 6px 6px 25px rgba(0, 0, 0, 0.747);
-    border: 3px solid rgb(255, 0, 0);
+    /*border: 3px solid rgb(255, 0, 0);*/
     
 }
 
@@ -59,7 +59,7 @@ h1 {
     justify-content: center;
     align-items: center;
     height: 100%;
-    border: 3px solid rgb(0, 0, 0);
+    /*border: 3px solid rgb(0, 0, 0);*/
 }
 
 .connectionButton1 {
@@ -94,19 +94,19 @@ h1 {
     align-items: center;
     height: 900px;
     width: 100%;
-    border: 3px solid rgb(0, 0, 0);
+    /*border: 3px solid rgb(0, 0, 0);*/
 }
 
 .texteDescription {
     width: 50%;
     padding: 0 10%;
-    border: 3px solid rgb(0, 0, 0);
+    /*border: 3px solid rgb(0, 0, 0);*/
 }
 
 .imageDescription {
     padding: 0 10%;
     width: 50%;
-    border: 3px solid rgb(0, 0, 0);
+    /*border: 3px solid rgb(0, 0, 0);*/
 }
 
 .resize {
@@ -121,7 +121,7 @@ h1 {
     height: 900px;
     width: 100%;
     background-color: white;
-    border: 3px solid rgb(212, 12, 12);
+    /*border: 3px solid rgb(212, 12, 12);*/
 }
 
 .carousel {
@@ -210,7 +210,7 @@ footer {
     width: 100%;
     bottom: 0px;
     background: #1d2135;
-    border: 3px solid rgb(10, 255, 2);
+    /*border: 3px solid rgb(10, 255, 2);*/
     color: white;
     margin: 0;
 }
@@ -226,13 +226,13 @@ footer {
   cursor: pointer;
 }
 
-/* The container <div> - needed to position the dropdown content */
+
 .dropdown {
   position: relative;
   display: inline-block;
 }
 
-/* Dropdown Content (Hidden by Default) */
+
 .dropdown-content {
   display: none;
   position: absolute;
@@ -243,7 +243,6 @@ footer {
   border-radius: 10px;
 }
 
-/* Links inside the dropdown */
 .dropdown-content a {
   color: black;
   padding: 12px 16px;
@@ -251,16 +250,13 @@ footer {
   display: block;
 }
 
-/* Change color of dropdown links on hover */
 .dropdown-content a:hover {
     background-color: #ddd;
     border-radius: 10px;
 }
 
-/* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {display: block;}
 
-/* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
     background-color: rgb(70, 118, 223);
     border-radius: 10px;

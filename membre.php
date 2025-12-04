@@ -1,10 +1,17 @@
 <!doctype html>
 <html lang="fr">
+<?php
+session_set_cookie_params([
+    'httponly' => true,
+    'secure'   => false, 
+    'samesite' => 'Lax',
+]);
+session_start();
+?>
 
 <head>
     
     <?php
-        session_start();
         if (isset($_POST["deco"]) or !isset($_SESSION["connect"])) {
             unset($_SESSION["connect"]);
             $url = "login.php";
@@ -18,6 +25,7 @@
         }
     
     ?>
+    <head>
     <meta charset="utf-8">
     <title>Crepo | Membres</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.png">
@@ -67,17 +75,115 @@
             
         </ul>
         <form action="" method="post">
+            <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
             <input name="deco" type="submit" value="déconnexion" />
         </form>
 		<form action="" method="post">
+            <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
 			<input name="retourtask" type="submit" value = retour />	
+            
 		</form>
     </nav>
-
-
-
-
+	
 <main>
+    <section>
+        <div class="background">
+            <?php if ($errorMessage): ?>
+                <p style="color:red;font-weight:bold;"><?= e($errorMessage) ?></p>
+            <?php elseif ($infoMessage): ?>
+                <p style="color:green;font-weight:bold;"><?= e($infoMessage) ?></p>
+            <?php endif; ?>
+
+            <div class="membersList">
+                <h1>Liste des membres</h1><br>
+                <?php foreach ($members as $m): ?>
+                    <div class="membersListItems">
+                        <?= e($m['user']) ?><br>
+                        Droit: <?= (int)$m['droit'] ?><br>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <div class="membersManagement">
+                <?php if ($currentRight >= 5): ?>
+                    <h3>Ajouter un membre</h3>
+                    <form action="" method="post">
+                        <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+                        Identifiant (pseudo):<br>
+                        <input name="addnom" type="text" maxlength="50"><br>
+                        <input name="add" type="submit" value="Ajouter">
+                    </form>
+                    <br>
+
+                    <h3>Gérer les droits</h3>
+                    <form action="" method="post">
+                        <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+
+                        <label for="nom">Nom:</label>
+                        <select name="nom" id="nom">
+                            <option value="">--Choisissez un membre--</option>
+                            <?php foreach ($members as $m): ?>
+                                <?php
+                                $mid    = (int)$m['id_user'];
+                                $mRight = (int)$m['droit'];
+                                $canSee = ($mRight < $currentRight) || ($mid === $userId);
+                                ?>
+                                <?php if ($canSee): ?>
+                                    <option value="<?= $mid ?>"><?= e($m['user']) ?></option>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </select><br>
+
+                        <label for="droit">Droit:</label>
+                        <select name="droit" id="droit">
+                            <option value="">--Choisissez un droit--</option>
+                            <?php
+                            if ($currentRight == 9) {
+                                echo '<option value="9">9 propriétaire</option>';
+                            }
+                            for ($i = $currentRight - 1; $i >= 1; $i--) {
+                                if ($i == 1) {
+                                    echo '<option value="1">1 simple employé</option>';
+                                } else {
+                                    echo '<option value="'.$i.'">'.$i.'</option>';
+                                }
+                            }
+                            ?>
+                        </select><br>
+
+                        <input name="right" type="submit" value="Confirmer">
+                    </form>
+                    <br>
+
+                    <h3>Supprimer un membre</h3>
+                    <form action="" method="post">
+                        <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+
+                        <label for="supp">Nom:</label>
+                        <select name="supp" id="supp">
+                            <option value="">--Choisissez un membre--</option>
+                            <?php foreach ($members as $m): ?>
+                                <?php
+                                $mid    = (int)$m['id_user'];
+                                $mRight = (int)$m['droit'];
+                                $canSee = ($mRight < $currentRight) || ($mid === $userId);
+                                ?>
+                                <?php if ($canSee): ?>
+                                    <option value="<?= $mid ?>"><?= e($m['user']) ?></option>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </select><br>
+
+                        <input name="sup" type="submit" value="Supprimer">
+                    </form>
+                <?php endif; ?>
+
+                <br><br>
+                <form action="" method="post">
+                    <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+                    <input name="retourtask" type="submit" value="Retour">
+				</form>
+               
     <section>
         <div class="background">
 			<?php
@@ -263,26 +369,7 @@
 						}
 						
 						if($x == 2){
-							echo'<div class="managementItems">';
-							
-
-							echo 'Ajouter un membre
-						<form action="" method="post">
 						
-						<input name="addnom" type="text" placeholder="Nom" class="inputNom"/> <br>
-						<input name="add" type="submit" value="Ajouter" class="inputValidation" />
-						</form>';
-						if(isset($_POST["add"])){
-							if($b == 0)
-								echo "Utilisateur incorrecte<br>";
-							
-							elseif($p == 0)
-								echo "Utilisateur ajouté<br>";
-							else
-								echo "Utilisateur déjà présent<br>";
-						}
-						echo'</div>';
-							
 							
 							
 							
@@ -382,6 +469,7 @@
 		</div>
 	</section>
 </main>
+
 </body>
 
 </html>
