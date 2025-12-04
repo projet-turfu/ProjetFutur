@@ -41,13 +41,13 @@
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="<?php echo'projet.php?param=1' ?>">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h168q13-36 43.5-58t68.5-22q38 0 68.5 22t43.5 58h168q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm80-80h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm200-190q13 0 21.5-8.5T510-820q0-13-8.5-21.5T480-850q-13 0-21.5 8.5T450-820q0 13 8.5 21.5T480-790ZM200-200v-560 560Z"/></svg>
                     <span>Projets</span>
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="projet.php">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M360-200v-80h480v80H360Zm0-240v-80h480v80H360Zm0-240v-80h480v80H360ZM200-160q-33 0-56.5-23.5T120-240q0-33 23.5-56.5T200-320q33 0 56.5 23.5T280-240q0 33-23.5 56.5T200-160Zm0-240q-33 0-56.5-23.5T120-480q0-33 23.5-56.5T200-560q33 0 56.5 23.5T280-480q0 33-23.5 56.5T200-400Zm0-240q-33 0-56.5-23.5T120-720q0-33 23.5-56.5T200-800q33 0 56.5 23.5T280-720q0 33-23.5 56.5T200-640Z"/></svg>
                     <span>Tâches</span>
                 </a>
@@ -59,7 +59,7 @@
                 </a>
             </li>
             <li class="logOut">
-                <a href="">
+                <a href="login.php">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/></svg>
                     <span>Déconnexion</span>
                 </a>
@@ -69,6 +69,9 @@
         <form action="" method="post">
             <input name="deco" type="submit" value="déconnexion" />
         </form>
+		<form action="" method="post">
+			<input name="retourtask" type="submit" value = retour />	
+		</form>
     </nav>
 
 
@@ -224,6 +227,8 @@
 						
 						
 						echo'<div class="membersList">';
+
+						
 						echo'<h1>Liste des membres</h1><br>';
 						foreach($res_test as $res){
 							
@@ -239,23 +244,9 @@
 						echo "<br><br>";
 						
 						echo'<div class="membersManagement">';
-						if(isset($_POST["add"])){
-							if($b == 0)
-								echo "pseudo introuvable<br>";
+						
 							
-							elseif($p == 0)
-								echo "utilisateur ajoutée<br>";
-							else
-								echo "utilisateur déjà présent<br>";
-						}
-							
-							
-						
-						
-						
-						
-						
-						
+
 						$stmt = $mysqli->prepare("select id_user, droit from project_membre where id_project = ?;");
 						$stmt->bind_param("i", $id);
 						$stmt->execute();
@@ -272,16 +263,27 @@
 						}
 						
 						if($x == 2){
+							echo'<div class="managementItems">';
 							
-							echo 'Ajouté un membre: <br>
+
+							echo 'Ajouter un membre
 						<form action="" method="post">
-						identifiant:
-						<input name="addnom" type="text" /> <br>
-						<input name="add" type="submit" value="Ajouter" />
+						
+						<input name="addnom" type="text" placeholder="Nom" class="inputNom"/> <br>
+						<input name="add" type="submit" value="Ajouter" class="inputValidation" />
 						</form>';
+						if(isset($_POST["add"])){
+							if($b == 0)
+								echo "Utilisateur incorrecte<br>";
+							
+							elseif($p == 0)
+								echo "Utilisateur ajouté<br>";
+							else
+								echo "Utilisateur déjà présent<br>";
+						}
+						echo'</div>';
 							
 							
-							echo "<br><br>";
 							
 							
 							
@@ -291,15 +293,13 @@
 							
 							
 							
-							
-							
-							
-							echo 'Gérer les droits: <br><form action="" method="post">
-								<label for="nom-select">Nom:</label>
+							echo'<div class="managementItems">';
+							echo 'Gérer les droits <br><form action="" method="post">
+								<label for="nom-select"></label>
 								
 								<select name="nom" id="nom">
-								<option value="">--Choisissez une option--</option>';
-								
+								<option value="" >--Choisissez un membre--</option>';
+							
 							
 							$stmt = $mysqli->prepare("select DISTINCT U.id_user, U.user, droit from user U, project_membre M where U.id_user = M.id_user and id_project = ?;");
 							$stmt->bind_param("i", $id);
@@ -319,10 +319,10 @@
 							echo '</select><br>';
 							
 									
-							echo '<label for="droit-select">Droit:</label>
+							echo '<label for="droit-select"></label>
 
 									<select name="droit" id="pet-select">
-									<option value="">--Choisissez une option--</option>';
+									<option value="">--Choisissez un droit--</option>';
 									
 							$droitT = $droit - 1;  
 							if($droit == 9)
@@ -339,46 +339,43 @@
 							echo '</select><br>
 							<input name="right" type="submit" value = "Confirmer" />
 							</form>';
+							echo'</div>';
 						
 						}
+
+						echo'<div class="managementItems">';
 						
+
+						echo 'Supprimer un membre<form action="" method="post">
+							<label for="nom-select"></label>
+							
+							<select name="supp" id="supp">
+							<option value="">--Choisissez un membre--</option>';
+							
+						
+						$stmt = $mysqli->prepare("select DISTINCT U.id_user, U.user, droit from user U, project_membre M where U.id_user = M.id_user and id_project = ?;");
+						$stmt->bind_param("i", $id);
+						$stmt->execute();
+						$res_test = $stmt->get_result();
+						
+						
+						foreach($res_test as $res){
+							if($res["droit"] < $droit)
+								echo '<option value="'.$res["id_user"].'">'.$res["user"].'</option>';
+							elseif($idp == $res["id_user"])
+								echo '<option value="'.$res["id_user"].'">'.$res["user"].'</option>';
+								
+							
+						}
+						
+						echo '</select><br>
+						<input name="sup" type="submit" value = "Supprimer" />
+						</form>';
 						if($s == 1)
-								echo "Membre supprimé<br>";
-							
-							echo ' Supprimer un membre: <br><form action="" method="post">
-								<label for="nom-select">Nom:</label>
-								
-								<select name="supp" id="supp">
-								<option value="">--Choisissez une option--</option>';
-								
-							
-							$stmt = $mysqli->prepare("select DISTINCT U.id_user, U.user, droit from user U, project_membre M where U.id_user = M.id_user and id_project = ?;");
-							$stmt->bind_param("i", $id);
-							$stmt->execute();
-							$res_test = $stmt->get_result();
-							
-							
-							foreach($res_test as $res){
-								if($res["droit"] < $droit)
-									echo '<option value="'.$res["id_user"].'">'.$res["user"].'</option>';
-								elseif($idp == $res["id_user"])
-									echo '<option value="'.$res["id_user"].'">'.$res["user"].'</option>';
-									
-								
-							}
-							
-							echo '</select><br>
-							<input name="sup" type="submit" value = "Supprimer" />
-							</form>';
-							
-							echo "<br><br>";
-							echo'</div>';
-					
-					
-					echo  '<form action="" method="post">
-							<input name="retourtask" type="submit" value = retour />
-				
-							</form>';
+							echo "Membre supprimé<br>";
+						
+						echo'</div>';
+						echo'</div>';
 						
 				
 			?>

@@ -10,12 +10,25 @@
             header("Location: $url", true, 302);
             exit();
         }
+        
         elseif (isset($_POST['membre'])) {
             $_SESSION["crea"] = 1;
             $url = "membre.php";
             header("Location: $url", true, 302);
             exit();
          }
+         elseif(isset($_GET["param"])){
+            $_SESSION["crea"] == 2;
+            unset($_GET["param"]);
+            if(!isset($_POST["retourtask"]))
+                $_POST["retourtask"] = True;
+            
+            unset($_POST["projet"]);
+            $url = "projet.php";
+            header("Location: $url", true, 302);
+            exit();
+
+        }
     ?>
     <meta charset="utf-8">
     <title>Crepo | Projets</title>
@@ -103,8 +116,9 @@
                         $p = 0;
 
                         if (isset($_POST["projet"]))
-                            $_SESSION["projet"] = $_POST["projet"]; 
+                            $_SESSION["projet"] = $_POST["projet"];
 
+                        //// faut que le if fonctionne pas pour la redif projet
                         if ((isset($_SESSION["projet"]) || $_SESSION["crea"] == 1) && !isset($_POST["retourtask"])) {
 
                             $nomp = $_SESSION["projet"];
@@ -179,22 +193,22 @@
                             }
                             
                             if(isset($_POST["doss"])){
-                $stmt = $mysqli->prepare("select id_project from project where nom = ?;");
-                $stmt->bind_param("s", $nomp);
-                $stmt->execute();
-                $res_rec = $stmt->get_result();
+                                $stmt = $mysqli->prepare("select id_project from project where nom = ?;");
+                                $stmt->bind_param("s", $nomp);
+                                $stmt->execute();
+                                $res_rec = $stmt->get_result();
 
-                foreach ($res_rec as $res){
-                    $stmt = $mysqli->prepare("INSERT INTO block (id_project, id_block, nom) VALUES (?, ?, ?);");
-                    $max=$maxi+1;
-                    $stmt->bind_param("iis", $res["id_project"], $max, $_POST["nomdoss"]);
-                    $stmt->execute();
-                }
+                                foreach ($res_rec as $res){
+                                    $stmt = $mysqli->prepare("INSERT INTO block (id_project, id_block, nom) VALUES (?, ?, ?);");
+                                    $max=$maxi+1;
+                                    $stmt->bind_param("iis", $res["id_project"], $max, $_POST["nomdoss"]);
+                                    $stmt->execute();
+                                }
 
-            }
-                            
-                            
-                            
+                            }
+                                            
+                                            
+                                            
 
                             $stmt = $mysqli->prepare("select id_project from project where nom = ?;");
                             $stmt->bind_param("s", $nomp);
