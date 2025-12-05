@@ -140,18 +140,34 @@ elseif(isset($_GET["param"])) {
                         $requete = "select nom from project;";
                         $resultat = $mysqli->query($requete);
 
+						$stmt = $mysqli->prepare("SELECT id_project FROM project WHERE nom = ?");
+						$stmt->bind_param("s", $_SESSION["projet"]);
+						$stmt->execute();
+						$resProj = $stmt->get_result();
+						
+						
+						$id = 0;
+						
+						foreach ($resProj as $res)
+							$id = $res["id_project"];
+							
+						
+						
                         if (isset($_SESSION["crea"]))
                             $_SESSION["crea"] = 1;
                         else
                             $_SESSION["crea"] = 2;
 
                         $p = 0;
+						
+						if(isset($_POST["retourtask"]))
+							$_SESSION["retourtask"] = 1; 
 
-                        if (isset($_POST["projet"]))
+                        if(isset($_POST["projet"]))
                             $_SESSION["projet"] = $_POST["projet"];
 
                         //// faut que le if fonctionne pas pour la redif projet
-                        if ((isset($_SESSION["projet"]) || $_SESSION["crea"] == 1) && !isset($_POST["retourtask"])) {
+                        if ((isset($_SESSION["projet"]) || $_SESSION["crea"] == 1) && !isset($_SESSION["retourtask"])) {
 
                             $nomp = $_SESSION["projet"];
 
@@ -160,16 +176,27 @@ elseif(isset($_GET["param"])) {
                             $stmt->execute();
                             $resultat = $stmt->get_result();
 
-                            $stmt2 = $mysqli->prepare("select max(id_block) as 'max' from block where id_project in (select id_project from project where nom =?) ;" );
+                            $stmt2 = $mysqli->prepare("select Distinct id_block from block where id_project in (select id_project from project where nom =?) ;" );
                             $stmt2->bind_param("s", $nomp);
                             $stmt2->execute();
                             $max = $stmt2->get_result();
                             $maxi = 0;
                             
                             foreach ($max as $x) {
-                                $maxi = $x['max'];
+                                $maxi = $maxi + 1;
                             }
-                            
+							
+							if (isset($_POST["doss"]) && check_csrf()) {
+								check_csrf();
+								$nomDoss = trim($_POST["nomdoss"]);
+								if ($nomDoss !== '') {
+									$max = $maxi;
+									$stmtInsertBlock = $mysqli->prepare("INSERT INTO block (id_project, id_block, nom) VALUES (?, ?, ?)");
+									$stmtInsertBlock->bind_param("iis", $id, $max, $nomDoss);
+									$stmtInsertBlock->execute();
+								}
+							}
+									
                             $stmt = $mysqli->prepare("UPDATE `task` SET `status` = ? WHERE id_task = ?;");
                             
                             foreach ($resultat as $x) {
@@ -231,25 +258,7 @@ elseif(isset($_GET["param"])) {
                     }
 
                     
-                    if (isset($_POST["doss"]) && check_csrf()) {
-                        $nomDoss = filter_input(INPUT_POST, "nomdoss", FILTER_SANITIZE_STRING);
-                        if (!empty($nomDoss)) {
-                            $stmt = $mysqli->prepare("SELECT id_project FROM project WHERE nom = ?");
-                            $stmt->bind_param("s", $nomp);
-                            $stmt->execute();
-                            $res_rec = $stmt->get_result();
-
-                            foreach ($res_test as $res) {
-    echo "<p>
-        <form action=\"\" method=\"post\">
-            <input type=\"hidden\" name=\"csrf_token\" value=\"" . e($csrfToken) . "\">
-            <input name=\"projet\" type=\"submit\" value=\"" . e($res["nom"]) . "\" /><br>
-            " . e($res["contenu"]) . "
-        </form><br></p>";
-}
-
-                        }
-                    }
+                    
 
                     // CRÉATION TÂCHE 
                     $stmt = $mysqli->prepare("SELECT id_project FROM project WHERE nom = ?");
@@ -393,24 +402,14 @@ elseif(isset($_GET["param"])) {
 
                 } else {
                     
-                
+                if (isset($_SESSION["retourtask"]))
+					unset($_SESSION["retourtask"]);
+				
                 unset($_SESSION["crea"]);
 
                             $id = (int)$_SESSION["connect"];
 
-                            $stmt = $mysqli->prepare("select nom, contenu from project where id_project in (select id_project from project_membre where id_user = ?);");
-                            $stmt->bind_param("i", $id);
-                            $stmt->execute();
-                            $res_test = $stmt->get_result();
-
-                            foreach ($res_test as $res) {
-                                echo "<p>";
-                                echo '
-                                <form action="" method="post">
-                                    <input name="projet" type="submit" value="' . $res["nom"] . '" /><br>
-                                    ' . $res["contenu"] . '
-                                </form><br></p>';
-                            }
+                            
 
                             $x = 0;
 
@@ -452,24 +451,40 @@ elseif(isset($_GET["param"])) {
                                 foreach ($idPro as $idPr) {
 
                                     $projectId = (int)$idPr["id_project"];
-                                    $role = 9;
+                                    
+								}
+								
+								$role = 9;
 
-                                    $stmt = $mysqli->prepare("INSERT INTO project_membre VALUES (?, ?, ?)");
-                                    $stmt->bind_param("iii", $id, $projectId, $role);
-                                    $stmt->execute();
-
-                                    $blocks = [
+								$stmt = $mysqli->prepare("INSERT INTO project_membre VALUES (?, ?, ?)");
+								$stmt->bind_param("iii", $id, $projectId, $role);
+								$stmt->execute();
+								
+								$blocks = [
                                         [0, "Futur"],
                                         [1, "En cours"],
                                         [2, "Fini"]
                                     ];
 
-                                    foreach ($blocks as $block) {
-                                        $stmt = $mysqli->prepare("INSERT INTO block VALUES (?, ?, ?)");
-                                        $stmt->bind_param("iis", $projectId, $block[0], $block[1]);
-                                        $stmt->execute();
-                                    }
-                                }
+								foreach ($blocks as $block) {
+									$stmt = $mysqli->prepare("INSERT INTO block VALUES (?, ?, ?)");
+									$stmt->bind_param("iis", $projectId, $block[0], $block[1]);
+									$stmt->execute();
+								}
+                            }
+							
+							$stmt = $mysqli->prepare("select nom, contenu from project where id_project in (select id_project from project_membre where id_user = ?);");
+                            $stmt->bind_param("i", $id);
+                            $stmt->execute();
+                            $res_test = $stmt->get_result();
+
+                            foreach ($res_test as $res) {
+                                echo "<p>";
+                                echo '
+                                <form action="" method="post">
+                                    <input name="projet" type="submit" value="' . $res["nom"] . '" /><br>
+                                    ' . $res["contenu"] . '
+                                </form><br></p>';
                             }
                             echo'<div class="managementItems">';
                             echo '

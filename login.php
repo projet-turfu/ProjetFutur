@@ -9,6 +9,13 @@ session_start();
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
+
+if(isset($_SESSION['project'])){
+	unset($_SESSION['project']);
+	if(isset($_SESSION["crea"]))
+		unset($_SESSION["crea"]);
+	$_SESSION["retourtask"] = 1;
+}
 $csrfToken = $_SESSION['csrf_token'];
 
 $error       = '';
@@ -53,6 +60,9 @@ function check_csrf() {
 function e($string) {
     return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
 }
+
+if(isset($_SESSION['project']))
+	unset($_SESSION['project']);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
@@ -103,6 +113,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $stmtIns->close();
                     }
                 }
+				
+
             }
 
             // Connexion 
@@ -127,6 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         if ($stmt->fetch() && password_verify($passwordRaw, $hash)) {
                             session_regenerate_id(true);
                             $_SESSION['connect']        = $idUser;
+							
                             $_SESSION['login_attempts'] = 0;
                             header("Location: projet.php");
                             exit();
@@ -138,7 +151,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $stmt->close();
                     }
                 }
+				
             }
+			
         }
     }
 }
