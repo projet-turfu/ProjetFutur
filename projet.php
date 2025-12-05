@@ -53,7 +53,7 @@ function check_csrf() { return isset($_POST['csrf_token']) && hash_equals($_SESS
 if (isset($_POST["deco"]) && check_csrf()) {
     session_unset(); session_destroy(); header("Location: login.php", true, 302); exit();
 }
-elseif (isset($_POST['membre']) && check_csrf()) {
+if (isset($_POST['membre']) && check_csrf()) {
     $_SESSION["crea"] = 1; header("Location: membre.php", true, 302); exit();
 }
 elseif(isset($_GET["param"])) {
@@ -109,10 +109,12 @@ elseif(isset($_GET["param"])) {
             
         </ul>
         <form action="" method="post">
-            <input name="deco" type="submit" value="déconnexion" />
+            <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+            <input name="deco" type="submit" value="Déconnexion" />
         </form>
         <form action="" method="post">
-            <input name="retourtask" type="submit" value="retour" />
+            <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+            <input name="retourtask" type="submit" value="Retour" />
             <input name="membre" type="submit" value="Membre" />
         </form>
     </nav>
@@ -120,7 +122,7 @@ elseif(isset($_GET["param"])) {
  <main>
         <section>
             <div class="background">
-                <div class="columnNames">
+                <div class="projectsList">
                 
                     <?php
 
@@ -137,6 +139,16 @@ elseif(isset($_GET["param"])) {
 
                         $requete = "select nom from project;";
                         $resultat = $mysqli->query($requete);
+						
+						$stmt = $mysqli->prepare("select id_project from project where nom = ?;");
+						$stmt->bind_param("s", $_POST["nomcrea"]);
+						$stmt->execute();
+						$idPro = $stmt->get_result();
+
+						foreach ($idPro as $idPr) {
+
+							$projectId = (int)$idPr["id_project"];
+						}
 
                         if (isset($_SESSION["crea"]))
                             $_SESSION["crea"] = 1;
@@ -232,18 +244,20 @@ elseif(isset($_GET["param"])) {
                     if (isset($_POST["doss"]) && check_csrf()) {
                         $nomDoss = filter_input(INPUT_POST, "nomdoss", FILTER_SANITIZE_STRING);
                         if (!empty($nomDoss)) {
-                            $stmt = $mysqli->prepare("SELECT id_project FROM project WHERE nom = ?");
-                            $stmt->bind_param("s", $nomp);
+							$maxiprio = $maxi + 1;
+                            $stmt = $mysqli->prepare("insert into block values (?, ?, ?)");
+                            $stmt->bind_param("iis", $projectId, $maxiprio, $nomDoss);
                             $stmt->execute();
+							
                             $res_rec = $stmt->get_result();
 
-                            foreach ($res_test as $res) {
-    echo "<p>
-        <form action=\"\" method=\"post\">
-            <input type=\"hidden\" name=\"csrf_token\" value=\"" . e($csrfToken) . "\">
-            <input name=\"projet\" type=\"submit\" value=\"" . e($res["nom"]) . "\" /><br>
-            " . e($res["contenu"]) . "
-        </form><br></p>";
+                            foreach ($res_rec as $res) {
+								echo "<p>
+									<form action=\"\" method=\"post\">
+										<input type=\"hidden\" name=\"csrf_token\" value=\"" . e($csrfToken) . "\">
+										<input name=\"projet\" type=\"submit\" value=\"" . e($res["nom"]) . "\" /><br>
+										" . e($res["contenu"]) . "
+									</form><br></p>";
 }
 
                         }
@@ -385,7 +399,7 @@ elseif(isset($_GET["param"])) {
 
                     echo '<form action="" method="post">
                               <input type="hidden" name="csrf_token" value="' . e($csrfToken) . '">
-                              <input name="retourtask" type="submit" value="retour" />
+                              <input name="retourtask" type="submit" value="Retour" />
                               <input name="membre" type="submit" value="Membre" />
                           </form>';
 
@@ -469,7 +483,7 @@ elseif(isset($_GET["param"])) {
                                     }
                                 }
                             }
-
+                            echo'<div class="managementItems">';
                             echo '
                             <form action="" method="post">
                                 Nom du projet:
@@ -478,13 +492,14 @@ elseif(isset($_GET["param"])) {
                                 <input name="contenucrea" type="text" /> <br>
                                 <input name="crea" type="submit" value="Créer" />
                             </form>';
+                            echo'</div>';
                         }
 
                     
                     }
                     echo '
                     <form action="" method="post">
-                        <input name="deco" type="submit" value="déconnexion" />
+                        <input name="deco" type="submit" value="Déconnexion" />
                     </form>';
             ?>
                 
