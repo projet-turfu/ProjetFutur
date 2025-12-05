@@ -1,0 +1,278 @@
+/* style file for the profile page */
+@import url('https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    line-height: 1.5rem;
+}
+
+body {
+    font-family: "Alan Sans", sans-serif;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    background-color: grey;
+    
+}
+
+/* Sidebar part */
+.logo {
+    display: flex;
+    font-size: 2em;
+    align-items: center;;
+    border: 3px solid rgb(80, 135, 255);
+}
+
+.logoCrepo {
+    height: 35px;
+    width: 35px;
+}
+
+
+#sidebar {
+    box-sizing: border-box;
+    height: 100vh;
+    width: 200px;
+    padding: 5px 1em;
+    background-color: rgb(80, 135, 255);
+    border-right: 1px solid rgb(0, 0, 0);
+    position: sticky;
+    top: 0;
+    align-self: start;
+    transition: 300ms ease-in-out;
+    overflow: hidden;
+    text-wrap: nowrap;
+    border-radius: 10px;
+}
+
+#sidebar.close {
+    padding: 5px;
+    width: 60px;
+}
+
+#sidebar ul {
+    list-style: none;
+}
+
+#sidebar > ul > li:first-child {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 16px;
+    .logo{
+        font-weight: 600;
+    }
+}
+
+#sidebar ul li.active a{
+    color: rgb(34, 255, 119);
+    svg{
+        fill: rgb(34, 255, 119);
+    }
+}
+
+#sidebar a, #sidebar.logo {
+    border-radius: .5em;
+    padding: .85em;
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+#sidebar svg {
+    flex-shrink: 0;
+    fill: white
+}
+
+#sidebar a span {
+    flex-grow: 1;
+}
+
+#sidebar a:hover {
+    background-color: rgb(52, 88, 165);
+}
+
+.rotate svg:last-child{
+    rotate: 180deg;
+}
+
+#toggleBtn {
+    margin-left: auto;
+    padding: 1em;
+    border: none;
+    border-radius: .5em;
+    background: none;
+    cursor: pointer;
+
+    svg {
+        transition: rotate 150ms ease;
+    }
+}
+
+#toggleBtn:hover {
+    background-color: rgb(52, 88, 165);
+}
+
+.logOut {
+    padding-top: 300%;
+}
+
+/* Main part */
+.background {
+    height:97vh;
+    max-width: 99%;
+    border: 2px solid rgb(255, 255, 255);
+    margin: 10px;
+    border-radius: 20px;
+    background: url('/images/ProjectsBackground.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    /*display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: auto;
+    gap: 1em;
+    padding-left: 1em;
+    padding-right: 1em;*/
+}
+
+.columnNames {
+    overflow-y: auto;
+    overflow-x: auto;
+    /*border: 2px solid rgb(255, 0, 0);*/
+    display: grid;
+    grid-auto-flow: column;
+    gap: 1em;
+    grid-auto-columns: 400px;
+    /*grid-template-rows: 200px;
+    gap: 1em;
+    padding-left: 1em;
+    padding-right: 1em;*/
+}
+
+.projectsList {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    border-radius: 10px;
+    padding-top: 20px;
+    height: 600px;
+}
+
+.projectsManagement {
+    display: flex;
+    height: 200px;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+    border-radius: 25px;
+    gap: 25px;
+}
+
+.item {
+    padding: 1em;
+    background-color: rgba(59, 102, 167, 0.849);
+    text-align: center;
+    border-radius: 10px;
+    font-size: 1.2em;
+    margin-top: 1em;
+    gap: 1em;
+    
+}
+
+/* style for the members page */
+
+h1{
+    font-size: 1.6em;
+    text-align: center;
+}
+
+.membersList {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    border-radius: 10px;
+    padding-top: 20px;
+    height: 600px;
+}
+
+
+
+.membersListItems{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(129, 194, 255, 0.678);
+    height: 45px;
+    width: 200px;
+    border-radius: 10px;
+    padding: 10px 0 10px 0;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    align-self: center;
+    text-align: center;
+}
+
+.membersManagement {
+    display: flex;
+    height: 200px;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+    border-radius: 25px;
+    gap: 25px;
+}
+
+.managementItems {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 150px;
+    background-color: rgba(0, 0, 0, 0.185);
+    backdrop-filter: blur(20px);
+    border: 2px solid white;
+    border-radius: 25px;
+    color: white;
+    
+}
+
+.inputNom {
+    font-family: "Alan Sans", sans-serif;
+    width: 200px;
+    height: 30px;
+    border-radius: 15px;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid white;
+    color: white;
+    padding-left: 10px;
+}
+
+.inputNom::placeholder {
+    color: white;
+    font-family: "Alan Sans", sans-serif;
+    
+}
+
+input[type="submit"] {
+    border: none;
+    outline: none;
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: "Alan Sans", sans-serif;
+    height: 30px;
+    width: auto;
+    padding: 0 5px 0 5px;
+    color: white;
+    font-size: 1.1em;
+    
+}
