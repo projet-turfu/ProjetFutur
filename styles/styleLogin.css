@@ -1,0 +1,128 @@
+/* style file for the login page */
+@import url('https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Alan Sans", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('/images/LoginBackground.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+hr {
+    width: 75%;
+    margin:0 auto;
+}
+
+.logoCrepo {
+    height: 50px;
+    width: 50px;
+    transform: translateY(15px);
+}
+
+
+.wrapper {
+    width: 420px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 6px 6px 25px rgba(0, 0, 0, 0.747);
+    padding-bottom: 20px;
+
+}
+
+.wrapper h1 {
+    font-size: 36px;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+
+.wrapper h3 {
+    text-align: center;
+}
+
+.choiceButtons {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.signinButton{
+    height: 45px;
+    width: 300px;
+    background-color: rgb(80, 135, 255);
+    color: white;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    font-size: 1.1em;
+}
+
+.loginButton, .signinButtonBottom{
+    height: 45px;
+    width: 300px;
+    background-color: white;
+    border-radius: 3px;
+    border: solid 1px rgb(175, 175, 175);
+    outline: none;
+    font-size: 1.1em;
+}
+
+.signinButton:hover, .loginButton:hover, .signinButtonBottom:hover {
+    background-image: linear-gradient(rgb(0 0 0/15%) 0 0);
+    cursor: pointer;
+
+}
+
+
+.infoInput {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    
+}
+
+.inputBox {
+    height: 45px;
+    width: 300px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.inputBox:hover {
+    background-image: linear-gradient(rgb(0 0 0/2%) 0 0);
+}
+
+input.inputBox {
+    font-size: 1.1em;
+    padding-left: 10px;
+}
+
+.finalButton {
+    height: 30px;
+    width: 150px;
+    background-color: rgb(80, 135, 255);
+    color: white;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    font-size: 1.1em;
+}
+
+.finalButton:hover {
+    background-image: linear-gradient(rgb(0 0 0/15%) 0 0);
+    cursor: pointer;
+}

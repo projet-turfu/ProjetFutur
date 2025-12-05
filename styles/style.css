@@ -1,0 +1,309 @@
+/* style file for the presentation page */
+@import url('https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&display=swap');
+
+
+
+html {
+    padding: 0;
+    margin: 0;
+}
+
+
+body {
+    font-family: "Alan Sans", sans-serif;
+    margin: 0; 
+    background-color: rgb(218, 218, 218); 
+    color: rgb(0, 0, 0); 
+    
+}
+
+/* header part */
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0;
+    z-index: 90;
+    position: fixed; 
+    margin-bottom: 10px;
+    width: 100%;
+    height: 60px;
+    background-color: rgb(80, 135, 255);
+    box-shadow: 6px 6px 25px rgba(0, 0, 0, 0.747);
+    /*border: 3px solid rgb(255, 0, 0);*/
+    
+}
+
+a{
+    text-decoration: none;
+}
+
+.logoCrepo {
+    height: 50px;
+    width: 50px;
+    transform: translateY(15px);
+}
+
+h1 {
+    color: white;
+}
+
+.accueilCrepo {
+    transform: translateY(-10px);
+}
+
+.headerButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    /*border: 3px solid rgb(0, 0, 0);*/
+}
+
+.connectionButton1 {
+    border-radius: 50px;
+    border: 3px solid rgb(124, 196, 255);
+    height: 40px;
+    font-family: "Alan Sans", sans-serif;
+    cursor: pointer;
+}
+
+.connectionButton2 {
+    border-radius: 50px;
+    border: 3px solid rgb(124, 196, 255);
+    height: 40px;
+    background-color: rgb(61, 74, 253);
+    font-family: "Alan Sans", sans-serif;
+    color: white;
+    cursor: pointer;
+}
+
+.connectionButton3 {
+    border-radius: 15px;
+    font-size: 20px;
+    border: 3px solid rgb(124, 196, 255);
+    height: 70px;
+    width: 300px;
+    background-color: rgb(48, 96, 226);
+    font-family: "Alan Sans", sans-serif;
+    color: white;
+    cursor: pointer;
+}
+
+.connectionButton1:hover, .connectionButton2:hover, .connectionButton3:hover {
+    opacity: 0.7;
+}
+
+/*main part */
+
+/* first section */
+.hero {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 900px;
+    width: 100%;
+    /*border: 3px solid rgb(0, 0, 0);*/
+    background: url('/images/backgroundTexture.jpg') no-repeat;
+    background-color: rgba(255, 255, 255, 0.308);
+    background-blend-mode: lighten;
+}
+
+h3 {
+    font-size: 35px;
+}
+
+p{
+    font-size: 22px;
+}
+.texteDescription {
+    text-align: center;
+    width: 50%;
+    padding: 0 10%;
+    /*border: 3px solid rgb(0, 0, 0);*/
+}
+
+.imageDescription {
+    
+    padding: 0 10%;
+    width: 50%;
+    /*border: 3px solid rgb(0, 0, 0);*/
+}
+
+.resize {
+    border-radius: 15px;
+    width: 100%;
+    max-width: max-content;
+    box-shadow: 6px 6px 25px rgba(0, 0, 0, 0.747);
+}
+
+/* second section */
+.sectionCarousel {
+    display: flex;
+    flex-direction: column;
+    height: 900px;
+    width: 100%;
+    background-color: white;
+    /*border: 3px solid rgb(212, 12, 12);*/
+    box-shadow: 6px 6px 25px rgba(0, 0, 0, 0.747);
+}
+
+.carousel {
+    width: 1113px;
+    height: 700px;
+    overflow-x: auto;
+    /*border: 3px solid rgb(40, 0, 150);*/
+    margin: 3em auto;
+    display: flex;
+    gap: 1em;
+    padding: 1em;
+    scroll-behavior: smooth;
+    anchor-name: --carousel;
+    scroll-snap-type: x mandatory;
+    scroll-marker-group: after;
+}
+
+.carousel::scroll-marker-group {
+    display: flex;
+    justify-content: center;
+    gap: .5em;
+}
+
+.card::scroll-marker {
+    content:'';
+    height: 1em;
+    width: 1em;
+    background-color: #7f92bb;
+    border-radius: 50%;
+}
+
+.card::scroll-marker:target-current {
+    background-color: #2a6cfc;
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel::scroll-button(right), .carousel::scroll-button(left) {
+    margin-left: 5px;
+    content: '>'; 
+    color: white;
+    border: none;
+    background-color: #afc8ff;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: fixed;
+    position-anchor: --carousel;
+    position-area: right center;
+    translate: 0%;
+}
+
+.carousel::scroll-button(left) {
+    content: '<';
+    position-area: left center;
+    translate: -20%;
+}
+
+.carousel::scroll-button(right):disabled, .carousel::scroll-button(left):disabled {
+    opacity: 0.5;
+    cursor: auto;
+}
+
+.card {
+    scroll-snap-align: start;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 1em;
+    flex: 0 0 20em;
+    aspect-ratio: 5 / 3;
+    background-color: rgb(197, 197, 197);
+    padding: 1em;
+    border-radius: .5em;
+    text-align: center;
+    align-content: center;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.459);
+    
+}
+
+.cardContents, .cardContents1{
+    border-radius: .5em;
+    align-content: center;
+}
+
+.cardContents1 {
+    background-color: rgb(80, 135, 255);
+    padding: 10px;
+}
+
+/* footer part */
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    height: 100px;
+    width: 100%;
+    bottom: 0px;
+    background: #1d2135;
+    /*border: 3px solid rgb(10, 255, 2);*/
+    color: white;
+    margin: 0;
+}
+
+/* Dropdown Button */
+.dropbtn {
+  background-color: rgb(80, 135, 255);
+  color: white;
+  padding: 16px;
+  font-family: "Alan Sans", sans-serif;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  
+}
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 10px;
+  text-align: center;
+  
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+    border-radius: 10px;
+}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {
+    background-color: rgb(70, 118, 223);
+    border-radius: 10px;
+}
