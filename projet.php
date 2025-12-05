@@ -110,11 +110,11 @@ elseif(isset($_GET["param"])) {
         </ul>
         <form action="" method="post">
             <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
-            <input name="deco" type="submit" value="déconnexion" />
+            <input name="deco" type="submit" value="Déconnexion" />
         </form>
         <form action="" method="post">
             <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
-            <input name="retourtask" type="submit" value="retour" />
+            <input name="retourtask" type="submit" value="Retour" />
             <input name="membre" type="submit" value="Membre" />
         </form>
     </nav>
@@ -122,7 +122,7 @@ elseif(isset($_GET["param"])) {
  <main>
         <section>
             <div class="background">
-                <div class="columnNames">
+                <div class="projectsList">
                 
                     <?php
 
@@ -387,7 +387,7 @@ elseif(isset($_GET["param"])) {
 
                     echo '<form action="" method="post">
                               <input type="hidden" name="csrf_token" value="' . e($csrfToken) . '">
-                              <input name="retourtask" type="submit" value="retour" />
+                              <input name="retourtask" type="submit" value="Retour" />
                               <input name="membre" type="submit" value="Membre" />
                           </form>';
 
@@ -471,7 +471,7 @@ elseif(isset($_GET["param"])) {
                                     }
                                 }
                             }
-
+                            echo'<div class="managementItems">';
                             echo '
                             <form action="" method="post">
                                 Nom du projet:
@@ -480,13 +480,14 @@ elseif(isset($_GET["param"])) {
                                 <input name="contenucrea" type="text" /> <br>
                                 <input name="crea" type="submit" value="Créer" />
                             </form>';
+                            echo'</div>';
                         }
 
                     
                     }
                     echo '
                     <form action="" method="post">
-                        <input name="deco" type="submit" value="déconnexion" />
+                        <input name="deco" type="submit" value="Déconnexion" />
                     </form>';
             ?>
                 

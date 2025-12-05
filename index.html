@@ -16,9 +16,8 @@
             <div class="dropdown">
                 <button class="dropbtn">Fonctionnalités</button>
                 <div class="dropdown-content">
-                    <a href="#fonctions1">Planificateur</a>
-                    <a href="#fonctions2">Blabla</a>
-                    <a href="#">Comment ça marche ?</a>
+                    <a href="#fonctions1">Organisez vos projets</a>
+                    <a href="#fonctions2">Comment ça marche ?</a>
                 </div>
             </div>
             <div class ="headerButtons">
@@ -32,24 +31,38 @@
     <main>
         <section class="hero" id="fonctions1">
             <div class="texteDescription">
-                <h3> Bonjour et bienvenue ! </h3>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                <br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <h3>Organisez vos projets facilement et rapidement avec Crepo !</h3>
+                <p>Grâce à nos tableaux de tâches vous n'aurez plus aucun problèmes lors de la gestion de vos travaux de groupe ou projets d'entreprise !<br><br> Alors n'hésitez plus et essayer le gratuitement dès maintenant !</p>
+                <form action="login.php" method="post">
+                <input name="inscription" type="submit" value="Inscrivez-vous ici !" class ="connectionButton3"/>
+                </form>
             </div>
             <div class="imageDescription">
-                <img src="images/calendrier.jpg" class="resize">
+                <img src="images/calendrier.jpg" class="resize" alt="un calendrier">
             </div>
         </section>
         <section class="sectionCarousel" id="fonctions2">
             <div class="carousel">
-                <div class="card">Image <br>gestion de projet</div>
-                <div class="card">card2</div>
-                <div class="card">card3</div>
+                <div class="card">
+                    <div class="cardContents1"><h3> Organisez vos projets de façon intuitive !</h3> <br><p>Avec Crepo, mettez en valeur vos projets,<br> assignez leur des tâches de façon simple et rapide<br> et ajoutez des membres afin de vous synchroniser avec votre équipe !</p></div>
+                    <div class="cardContents"><img src="images/taskImage.png" class="resize" alt="Interface Crepo"></div>
+                </div>
+                <div class="card">
+                    <div class="cardContents"><img src="images/projectsImage.png" class="resize" alt="Interface Crepo"></div>
+                    <div class="cardContents1"><h3>La création de tableaux n'a jamais été aussi facile !</h3> <br><p>Choisissez un titre et une description<br>et voilà !<br>Vous pouvez commencer la gestion de votre projet en un instant et augmenter votre productivité dès maintenant !</p></div>
+                </div>
+                <div class="card">
+                    <div class="cardContents1"><h3>Facilitez votre travail d'équipe !</h3> <br><p>Invitez les membres de votre équipe sur Crepo<br> et ajoutez-les à vos projets pour leur assignez<br> des tâches et booster votre productivité !<br> Travailler en équipe n'a jamais été aussi facile !</p></div>
+                    <div class="cardContents"><img src="images/membersImage.png" class="resize" alt="Interface Crepo"></div>
+                </div>
             </div>
         </section>
 	</main>
     <footer>
-        Crepo footer
+        <form action="login.php" method="post">
+            <input name="inscription" type="submit" value="Débutez dès maintenant" class ="connectionButton2"/>
+        </form>
+        <div>Crepo<br>Made by Jeremy Allier - Esteban Kropp - Quentin Augier</div>
     </footer>
 </body>
 </html>

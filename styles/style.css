@@ -80,7 +80,19 @@ h1 {
     cursor: pointer;
 }
 
-.connectionButton1:hover, .connectionButton2:hover {
+.connectionButton3 {
+    border-radius: 15px;
+    font-size: 20px;
+    border: 3px solid rgb(124, 196, 255);
+    height: 70px;
+    width: 300px;
+    background-color: rgb(48, 96, 226);
+    font-family: "Alan Sans", sans-serif;
+    color: white;
+    cursor: pointer;
+}
+
+.connectionButton1:hover, .connectionButton2:hover, .connectionButton3:hover {
     opacity: 0.7;
 }
 
@@ -95,23 +107,37 @@ h1 {
     height: 900px;
     width: 100%;
     /*border: 3px solid rgb(0, 0, 0);*/
+    background: url('/images/backgroundTexture.jpg') no-repeat;
+    background-color: rgba(255, 255, 255, 0.308);
+    background-blend-mode: lighten;
 }
 
+h3 {
+    font-size: 35px;
+}
+
+p{
+    font-size: 22px;
+}
 .texteDescription {
+    text-align: center;
     width: 50%;
     padding: 0 10%;
     /*border: 3px solid rgb(0, 0, 0);*/
 }
 
 .imageDescription {
+    
     padding: 0 10%;
     width: 50%;
     /*border: 3px solid rgb(0, 0, 0);*/
 }
 
 .resize {
+    border-radius: 15px;
     width: 100%;
     max-width: max-content;
+    box-shadow: 6px 6px 25px rgba(0, 0, 0, 0.747);
 }
 
 /* second section */
@@ -122,6 +148,7 @@ h1 {
     width: 100%;
     background-color: white;
     /*border: 3px solid rgb(212, 12, 12);*/
+    box-shadow: 6px 6px 25px rgba(0, 0, 0, 0.747);
 }
 
 .carousel {
@@ -190,14 +217,29 @@ h1 {
 
 .card {
     scroll-snap-align: start;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 1em;
     flex: 0 0 20em;
     aspect-ratio: 5 / 3;
-    background-color: rgb(10, 255, 2);
+    background-color: rgb(197, 197, 197);
     padding: 1em;
     border-radius: .5em;
     text-align: center;
     align-content: center;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.459);
+    
+}
+
+.cardContents, .cardContents1{
+    border-radius: .5em;
+    align-content: center;
+}
+
+.cardContents1 {
+    background-color: rgb(80, 135, 255);
+    padding: 10px;
 }
 
 /* footer part */
@@ -206,6 +248,7 @@ footer {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+    text-align: center;
     height: 100px;
     width: 100%;
     bottom: 0px;
@@ -230,6 +273,7 @@ footer {
 .dropdown {
   position: relative;
   display: inline-block;
+  
 }
 
 
@@ -241,6 +285,8 @@ footer {
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
   border-radius: 10px;
+  text-align: center;
+  
 }
 
 .dropdown-content a {
